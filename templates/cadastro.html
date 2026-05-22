@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Pedido - {{ dados.cliente }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Pedido para: {{ dados.cliente.capitalize() }}</h1>
+    <h1>Pedido #{{ proximo_pedido }}</h1>
+    <h2>Cliente: {{ dados.cliente.capitalize() }}</h2>
+    
+    <form action="/salvar" method="POST">
+      <!-- Campo oculto para manter o nome do cliente no envio -->
+      <input type="hidden" name="cliente" value="{{ dados.cliente }}">
+
+      <div class="grupo">
+        <label>Telefone</label>
+        <input
+          type="text"
+          name="telefone"
+          value="{{ dados.telefone }}"
+        >
+      </div>
+
+      <div class="grupo">
+        <label>Endereço</label>
+        <input
+          type="text"
+          name="endereco"
+          value="{{ dados.endereco }}"
+        >
+      </div>
+
+      <div class="grupo">
+        <label>Cidade</label>
+        <input
+          type="text"
+          name="cidade"
+          value="{{ dados.cidade }}"
+        >
+      </div>
+
+      <hr>
+      <h3>Dados do Pedido Atual</h3>
+
+      <div class="grupo">
+        <label>Produto</label>
+        <input
+          type="text"
+          name="produto"
+          placeholder="Nome do produto"
+          required
+        >
+      </div>
+
+      <div class="grupo">
+        <label>Quantidade</label>
+        <input
+          type="number"
+          name="quantidade"
+          placeholder="0"
+          required
+        >
+      </div>
+
+      <div class="grupo">
+        <label>Valor</label>
+        <input
+          type="number"
+          step="0.01"
+          name="valor"
+          placeholder="0,00"
+          required
+        >
+      </div>
+
+      <div class="acoes">
+        <button type="submit">Salvar Pedido</button>
+        <a href="/" class="btn-voltar">Voltar</a>
+      </div>
+
+    </form>
+  </div>
+</body>
+</html>

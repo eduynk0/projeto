@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Pedidos - Início</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Buscar ou Criar Cliente</h1>
+    
+    <form action="/buscar" method="POST">
+      <div class="grupo">
+        <label for="cliente">Nome do Cliente:</label>
+        <!-- O atributo 'list' conecta o input ao datalist abaixo -->
+        <input type="text" id="cliente" name="cliente" list="historico-clientes" placeholder="Digite o nome..." required autocomplete="off">
+        
+        <datalist id="historico-clientes">
+          {% for cliente in clientes %}
+            <option value="{{ cliente }}">
+          {% endfor %}
+        </datalist>
+      </div>
+
+      <div class="acoes">
+        <button type="submit">Próximo</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
