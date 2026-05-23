@@ -9,6 +9,7 @@
 <body>
   <div class="container">
     <h1>Buscar ou Criar Cliente</h1>
+    <p><strong>Próximo Pedido: #{{ proximo_pedido }}/{{ ano_atual }}</strong></p>
     
     <form action="/buscar" method="POST">
       <div class="grupo">
@@ -27,6 +28,31 @@
         <button type="submit">Próximo</button>
       </div>
     </form>
+
+    <hr>
+    <h2>Histórico de Orçamentos</h2>
+    <table border="1" style="width:100%; border-collapse: collapse; text-align: left;">
+      <thead>
+        <tr style="background-color: #f2f2f2;">
+          <th style="padding: 8px;">Pedido</th>
+          <th style="padding: 8px;">Cliente</th>
+          <th style="padding: 8px;">Data/Hora</th>
+          <th style="padding: 8px;">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in historico %}
+        <tr>
+          <td style="padding: 8px;"><a href="/editar/{{ item.cliente_slug }}/{{ item.arquivo }}">#{{ item.numero }}/{{ item.ano }}</a></td>
+          <td style="padding: 8px;">{{ item.cliente_nome }}</td>
+          <td style="padding: 8px;">{{ item.data }}</td>
+          <td style="padding: 8px;">
+            <a href="/exportar/{{ item.cliente_slug }}/{{ item.arquivo }}" style="color: green; text-decoration: none; font-weight: bold;">📥 Excel</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </body>
 </html>
